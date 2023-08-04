@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         // This loop will create 20 Views containing
         // the image with the count of view
-        data.add(ItemsViewModel(R.drawable.ic_baseline_folder_24, "Small"))
-
+        data.add(ItemsViewModel(R.drawable.r1, "Small"))
+        data.add(ItemsViewModel(R.drawable.r2, "Medium"))
+        data.add(ItemsViewModel(R.drawable.r3, "Large"))
+        data.add(ItemsViewModel(R.drawable.r4, "Electric"))
 
         // This will pass the ArrayList to our Adapter
         val adapter1 = CustomAdapter(data)
