@@ -117,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
         <EditText
+            android:id="@+id/startDateEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_drawable"
@@ -130,8 +131,8 @@
             android:layout_marginRight="10dp"
             />
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical|end"
                 android:src="@drawable/calendar_days"
                 android:onClick="showStartDatePicker"
@@ -143,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
         <EditText
+            android:id="@+id/endDateEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_drawable"
@@ -155,8 +157,8 @@
             android:layout_marginLeft="10dp"
             />
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical|end"
                 android:src="@drawable/calendar_days"
                 android:onClick="showEndDatePicker"

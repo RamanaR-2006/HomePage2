@@ -8,7 +8,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
@@ -82,13 +84,16 @@ class MainActivity : AppCompatActivity() {
         recyclerview1.adapter = adapter2
 
 
+
     }
     fun showStartDatePicker(view: View) {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             this,
-            { _, year, monthOfYear, dayOfMonth ->
-                // Handle selected start date
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}" // Format the date as needed
+                val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
+                startDateEditText.setText(selectedDate)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -99,15 +104,26 @@ class MainActivity : AppCompatActivity() {
 
     fun showEndDatePicker(view: View) {
         val calendar = Calendar.getInstance()
+        val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
+        val currentStartDateText = startDateEditText.text.toString()
+
         val datePickerDialog = DatePickerDialog(
             this,
-            { _, year, monthOfYear, dayOfMonth ->
-                // Handle selected end date
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}" // Format the date as needed
+                val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
+
+                // Check if selected end date is different from the current start date
+                if (selectedDate != currentStartDateText) {
+                    endDateEditText.setText(selectedDate)
+                } else {
+                    // Show a message indicating that the dates cannot be the same
+                    Toast.makeText(this, "End date cannot be the same as start date", Toast.LENGTH_SHORT).show()
+                }
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
-    }
-}
+    }}
