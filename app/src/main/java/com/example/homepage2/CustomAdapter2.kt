@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter2(private val mList: List<ItemsViewModel2>) : RecyclerView.Adapter<CustomAdapter2.ViewHolder>() {
-
+    var isItemSelected = false
     private var selectedItemPosition = RecyclerView.NO_POSITION
 
     // create new views
@@ -41,6 +41,8 @@ class CustomAdapter2(private val mList: List<ItemsViewModel2>) : RecyclerView.Ad
             selectedItemPosition = position
             notifyItemChanged(previousSelectedItem)
             notifyItemChanged(selectedItemPosition)
+            isItemSelected = true // Mark the item as selected
+            notifyDataSetChanged() // Notify adapter to refresh the views
         }
     }
 

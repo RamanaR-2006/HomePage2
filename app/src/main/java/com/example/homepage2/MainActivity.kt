@@ -69,8 +69,8 @@ class MainActivity : AppCompatActivity() {
 
         val adapter2 = CustomAdapter2(data1)
         recyclerview1.adapter = adapter2
-
-        updateButtonState()
+        val isRecyclerViewSelected1 = (recyclerview.adapter as? CustomAdapter)?.isItemSelected == true ||
+                (recyclerview1.adapter as? CustomAdapter2)?.isItemSelected == true
     }
 
     fun showStartDatePicker(view: View) {
@@ -146,4 +146,5 @@ class MainActivity : AppCompatActivity() {
                 timeEditText.text.isNotBlank() &&
                 selectedItemPosition > 0 &&
                 isRecyclerViewSelected
+
     }}
