@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
 
         val adapter2 = CustomAdapter2(data1)
         recyclerview1.adapter = adapter2
+
+        updateButtonState()
     }
 
     fun showStartDatePicker(view: View) {
@@ -123,6 +125,7 @@ class MainActivity : AppCompatActivity() {
         val finalButton = findViewById<ImageButton>(R.id.finalButton)
         if (areAllFieldsFilled()) {
             finalButton.setBackgroundColor(ContextCompat.getColor(this, R.color.your_desired_color))
+            Toast.makeText(this,"Valid!!",Toast.LENGTH_SHORT).show()
         } else {
             finalButton.setBackgroundColor(ContextCompat.getColor(this, R.color.default_button_color))
         }

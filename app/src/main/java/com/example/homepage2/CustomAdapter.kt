@@ -1,5 +1,6 @@
 package com.example.homepage2
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
+    private var selectedItemPosition = RecyclerView.NO_POSITION
+    // create new views
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_view_design, parent, false)
 
@@ -20,16 +21,27 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
     }
 
     // binds the list items to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
-        val ItemsViewModel = mList[position]
+        val item = mList[position]
 
-        // sets the image to the imageview from our itemHolder class
-        holder.imageView.setImageResource(ItemsViewModel.image)
+        holder.imageView.setImageResource(item.image)
+        holder.textView.text = item.text
 
-        // sets the text to the textview from our itemHolder class
-        holder.textView.text = ItemsViewModel.text
+        // Update item view based on selection state
+        if (position == selectedItemPosition) {
+            holder.itemView.setBackgroundResource(R.drawable.selected_item_background)
+        } else {
+            holder.itemView.setBackgroundResource(0)
+        }
 
+        // Set item click listener to update selection state
+        holder.itemView.setOnClickListener {
+            val previousSelectedItem = selectedItemPosition
+            selectedItemPosition = position
+            notifyItemChanged(previousSelectedItem)
+            notifyItemChanged(selectedItemPosition)
+        }
     }
 
     // return the number of the items in the list
@@ -38,8 +50,13 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
     }
 
     // Holds the views for adding it to image and text
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)
     }
 }
+
+
+
+
+
