@@ -7,15 +7,20 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
+    private var isRecyclerViewSelected = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,71 +32,51 @@ class MainActivity : AppCompatActivity() {
         }
 
         val spinner: Spinner = findViewById(R.id.spinner)
-
-        // Sample data for the spinner
         val items = listOf("--Select--", "Wrench", "Spare Tire", "Gasoline", "Chocolates?? idk")
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Apply the adapter to the spinner
         spinner.adapter = adapter
 
-        // getting the recyclerview by its id
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                updateSpinnerSelectionState()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Not needed in this case
+            }
+        }
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
+        recyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
-
-        // ArrayList of class ItemsViewModel
         val data = ArrayList<ItemsViewModel>()
-
-        // This loop will create 20 Views containing
-        // the image with the count of view
         data.add(ItemsViewModel(R.drawable.r1, "Small"))
         data.add(ItemsViewModel(R.drawable.r2, "Medium"))
         data.add(ItemsViewModel(R.drawable.r3, "Large"))
         data.add(ItemsViewModel(R.drawable.r4, "Electric"))
 
-        // This will pass the ArrayList to our Adapter
         val adapter1 = CustomAdapter(data)
-
-        // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter1
 
         val recyclerview1 = findViewById<RecyclerView>(R.id.recyclerview1)
+        recyclerview1.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        // this creates a vertical layout Manager
-        recyclerview1.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
-
-        // ArrayList of class ItemsViewModel
         val data1 = ArrayList<ItemsViewModel2>()
-
-        // This loop will create 20 Views containing
-        // the image with the count of view
         data1.add(ItemsViewModel2("0-12", "Months"))
         data1.add(ItemsViewModel2("12-24", "Months"))
         data1.add(ItemsViewModel2("24-36", "Months"))
         data1.add(ItemsViewModel2("Older than 36", "Months"))
 
-        // This will pass the ArrayList to our Adapter
         val adapter2 = CustomAdapter2(data1)
-
-        // Setting the Adapter with the recyclerview
         recyclerview1.adapter = adapter2
-
-
-
     }
+
     fun showStartDatePicker(view: View) {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}" // Format the date as needed
+                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}"
                 val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
                 startDateEditText.setText(selectedDate)
             },
@@ -110,14 +95,12 @@ class MainActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}" // Format the date as needed
+                val selectedDate = "${year}-${monthOfYear + 1}-${dayOfMonth}"
                 val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
 
-                // Check if selected end date is different from the current start date
                 if (selectedDate != currentStartDateText) {
                     endDateEditText.setText(selectedDate)
                 } else {
-                    // Show a message indicating that the dates cannot be the same
                     Toast.makeText(this, "End date cannot be the same as start date", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -126,4 +109,38 @@ class MainActivity : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun updateSpinnerSelectionState() {
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        val selectedItemPosition = spinner.selectedItemPosition
+
+        isRecyclerViewSelected = selectedItemPosition > 0
+        updateButtonState() // Update button state after spinner selection changes
+    }
+
+    private fun updateButtonState() {
+        val finalButton = findViewById<ImageButton>(R.id.finalButton)
+        if (areAllFieldsFilled()) {
+            finalButton.setBackgroundColor(ContextCompat.getColor(this, R.color.your_desired_color))
+        } else {
+            finalButton.setBackgroundColor(ContextCompat.getColor(this, R.color.default_button_color))
+        }
+    }
+
+    private fun areAllFieldsFilled(): Boolean {
+        val locationEditText = findViewById<EditText>(R.id.location)
+        val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
+        val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
+        val timeEditText = findViewById<EditText>(R.id.time)
+
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        val selectedItemPosition = spinner.selectedItemPosition
+
+        return locationEditText.text.isNotBlank() &&
+                startDateEditText.text.isNotBlank() &&
+                endDateEditText.text.isNotBlank() &&
+                timeEditText.text.isNotBlank() &&
+                selectedItemPosition > 0 &&
+                isRecyclerViewSelected
     }}

@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="your_status_bar_color">#E74F12</color>
+    <color name="your_desired_color">#E74F12</color>
+    <color name="default_button_color">#FFECDF</color>
 </resources>

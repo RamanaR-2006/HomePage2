@@ -83,6 +83,7 @@
         android:layout_marginHorizontal="22dp"
         android:textColorHint="#BBBBBB"
         android:drawableRight="@drawable/group_1854"
+        android:id="@+id/location"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -200,6 +201,7 @@
         android:layout_marginHorizontal="22dp"
         android:textColorHint="#BBBBBB"
         android:drawableRight="@drawable/clock_three"
+        android:id="@+id/time"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -343,6 +345,7 @@
         android:layout_marginHorizontal="22dp"
         android:layout_marginVertical="5dp"
         android:background="@drawable/button_drawable"
+        android:id="@+id/finalButton"
         />
         <RelativeLayout
             android:layout_width="match_parent"
