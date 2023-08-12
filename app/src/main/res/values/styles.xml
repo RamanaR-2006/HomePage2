@@ -7,4 +7,10 @@
     <style name="ButtonStyle">
         <item name="android:textColor">#FFECDF</item>
     </style>
+    <style name="ButtonStyle1" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:textSize">16sp</item> <!-- Adjust text size as needed -->
+    </style>
 </resources>
