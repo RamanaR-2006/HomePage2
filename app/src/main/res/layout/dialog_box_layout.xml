@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginHorizontal="20dp"
+    android:layout_marginHorizontal="40dp"
     android:layout_marginBottom="50dp">
 
     <LinearLayout
@@ -21,29 +21,84 @@
             android:layout_marginLeft="10dp">
         </TextView>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
     <TextView
         android:id="@+id/itemNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rain Coat" />
+        android:text="Rain Coat"
+        android:layout_weight="1"/>
 
     <ImageButton
         android:id="@+id/minusButton"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:text="-"
-        android:src="@drawable/baseline_remove_24"/>
+        android:src="@drawable/baseline_remove_24"
+        android:layout_marginHorizontal="4dp"/>
 
     <TextView
         android:id="@+id/quantityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0" />
+        android:text="0"
+        android:layout_marginHorizontal="4dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/plusButton"
-        android:layout_width="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="+"
+        android:src="@drawable/baseline_add_24"
+        android:layout_marginHorizontal="4dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+" />
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/itemNameTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gloves"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/minusButton2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:text="-"
+            android:src="@drawable/baseline_remove_24"
+            android:layout_marginHorizontal="4dp"/>
+
+        <TextView
+            android:id="@+id/quantityTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginHorizontal="4dp"/>
+
+        <ImageButton
+            android:id="@+id/plusButton2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:text="+"
+            android:src="@drawable/baseline_add_24"
+            android:layout_marginHorizontal="4dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FF5722">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add"
+            android:gravity="center"
+            android:textColor="@color/white">
+        </TextView>
+    </LinearLayout>
 </LinearLayout>
