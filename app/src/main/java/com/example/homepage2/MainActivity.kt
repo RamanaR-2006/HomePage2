@@ -36,7 +36,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var quantityTextView2: TextView
     private lateinit var minusButton2: ImageButton
     private lateinit var plusButton2: ImageButton
+    private lateinit var quantityTextView3: TextView
+    private lateinit var minusButton3: ImageButton
+    private lateinit var plusButton3: ImageButton
+    private lateinit var quantityTextView4: TextView
+    private lateinit var minusButton4: ImageButton
+    private lateinit var plusButton4: ImageButton
     private var selectedEquipmentCount = 0
+    private var selectedEquipmentCount2 = 0
+    private var selectedEquipmentCount3 = 0
+    private var selectedEquipmentCount4 = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -98,6 +107,14 @@ class MainActivity : AppCompatActivity() {
         minusButton2 = dialogBinding.minusButton2
         plusButton2 = dialogBinding.plusButton2
 
+        quantityTextView3 = dialogBinding.quantityTextView3
+        minusButton3 = dialogBinding.minusButton3
+        plusButton3 = dialogBinding.plusButton3
+
+        quantityTextView4 = dialogBinding.quantityTextView4
+        minusButton4 = dialogBinding.minusButton4
+        plusButton4 = dialogBinding.plusButton4
+
         // Set click listeners for minus and plus buttons
         minusButton.setOnClickListener {
             val currentQuantity = quantityTextView.text.toString().toInt()
@@ -111,15 +128,37 @@ class MainActivity : AppCompatActivity() {
             quantityTextView.text = (currentQuantity + 1).toString()
         }
         minusButton2.setOnClickListener {
-            val currentQuantity = quantityTextView.text.toString().toInt()
-            if (currentQuantity > 0) {
-                quantityTextView.text = (currentQuantity - 1).toString()
+            val currentQuantity2 = quantityTextView2.text.toString().toInt()
+            if (currentQuantity2 > 0) {
+                quantityTextView2.text = (currentQuantity2 - 1).toString()
             }
         }
 
         plusButton2.setOnClickListener {
-            val currentQuantity = quantityTextView.text.toString().toInt()
-            quantityTextView.text = (currentQuantity + 1).toString()
+            val currentQuantity2 = quantityTextView2.text.toString().toInt()
+            quantityTextView2.text = (currentQuantity2 + 1).toString()
+        }
+        minusButton3.setOnClickListener {
+            val currentQuantity3 = quantityTextView3.text.toString().toInt()
+            if (currentQuantity3 > 0) {
+                quantityTextView3.text = (currentQuantity3 - 1).toString()
+            }
+        }
+
+        plusButton3.setOnClickListener {
+            val currentQuantity3 = quantityTextView3.text.toString().toInt()
+            quantityTextView3.text = (currentQuantity3 + 1).toString()
+        }
+        minusButton4.setOnClickListener {
+            val currentQuantity4 = quantityTextView4.text.toString().toInt()
+            if (currentQuantity4 > 0) {
+                quantityTextView4.text = (currentQuantity4 - 1).toString()
+            }
+        }
+
+        plusButton4.setOnClickListener {
+            val currentQuantity4 = quantityTextView4.text.toString().toInt()
+            quantityTextView4.text = (currentQuantity4 + 1).toString()
         }
     }
 
@@ -207,8 +246,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getSpinnerText(): String {
-
-        return "Number of selected items: $selectedEquipmentCount"
+        var a = 0
+        var b = 0
+        var c = 0
+        if (selectedEquipmentCount>0){
+            a = 1
+        }
+        if(a==0 && b == 0){
+        return "Number of selected items: 0"}
+        else if((a>0 && b == 0)||(a==0&&b>0)){
+            return "Number of selected items: 1"
+        }
+        return "Number of selected items: 2"
     }
 
     private fun showDialogBox() {
@@ -226,6 +275,52 @@ class MainActivity : AppCompatActivity() {
             val currentQuantity = dialogBinding.quantityTextView.text.toString().toInt()
             dialogBinding.quantityTextView.text = (currentQuantity + 1).toString()
             selectedEquipmentCount++
+            updateSpinnerText()
+        }
+
+        minusButton2.setOnClickListener {
+            val currentQuantity2 = dialogBinding.quantityTextView2.text.toString().toInt()
+            if (currentQuantity2 > 0) {
+                dialogBinding.quantityTextView2.text = (currentQuantity2 - 1).toString()
+                selectedEquipmentCount2--
+                updateSpinnerText()
+            }
+        }
+
+        plusButton2.setOnClickListener {
+            val currentQuantity2 = dialogBinding.quantityTextView2.text.toString().toInt()
+            dialogBinding.quantityTextView2.text = (currentQuantity2 + 1).toString()
+            selectedEquipmentCount2++
+            updateSpinnerText()
+        }
+        minusButton3.setOnClickListener {
+            val currentQuantity3 = dialogBinding.quantityTextView3.text.toString().toInt()
+            if (currentQuantity3 > 0) {
+                dialogBinding.quantityTextView3.text = (currentQuantity3 - 1).toString()
+                selectedEquipmentCount3--
+                updateSpinnerText()
+            }
+        }
+
+        plusButton3.setOnClickListener {
+            val currentQuantity3 = dialogBinding.quantityTextView3.text.toString().toInt()
+            dialogBinding.quantityTextView3.text = (currentQuantity3 + 1).toString()
+            selectedEquipmentCount3++
+            updateSpinnerText()
+        }
+        minusButton4.setOnClickListener {
+            val currentQuantity4 = dialogBinding.quantityTextView4.text.toString().toInt()
+            if (currentQuantity4 > 0) {
+                dialogBinding.quantityTextView4.text = (currentQuantity4 - 1).toString()
+                selectedEquipmentCount4--
+                updateSpinnerText()
+            }
+        }
+
+        plusButton4.setOnClickListener {
+            val currentQuantity4 = dialogBinding.quantityTextView4.text.toString().toInt()
+            dialogBinding.quantityTextView4.text = (currentQuantity4 + 1).toString()
+            selectedEquipmentCount4++
             updateSpinnerText()
         }
         // Show the dialog box
