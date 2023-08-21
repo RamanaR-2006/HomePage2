@@ -249,12 +249,23 @@ class MainActivity : AppCompatActivity() {
         var a = 0
         var b = 0
         var c = 0
+        var d = 0
         if (selectedEquipmentCount>0){
             a = 1
         }
-        if(a==0 && b == 0){
+        if (selectedEquipmentCount2>0){
+            b = 1
+        }
+        if (selectedEquipmentCount3>0){
+            c = 1
+        }
+        if (selectedEquipmentCount4>0){
+            d = 1
+        }
+        var sum1 = a+b+c+d
+        if(sum1==0){
         return "Number of selected items: 0"}
-        else if((a>0 && b == 0)||(a==0&&b>0)){
+        else if(sum1==1){
             return "Number of selected items: 1"
         }
         return "Number of selected items: 2"
